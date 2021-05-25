@@ -16,22 +16,14 @@
   <div id="root"></div>
   <script type="text/babel">
     const App = () => {
-      const [max, setMax] = React.useState(0);
+      const widgetCount = 18;
       const [verified, setVerified] = React.useState([]);
       React.useEffect(() => {
-        const widgets = [...Array(max).keys()].map(n =>
+        const widgets = [...Array(widgetCount).keys()].map(n =>
           grecaptcha.render(`widget${n}`, {
-            sitekey: '6Le1Q-4aAAAAAPxiA-8un2vTzU5PoCw9-wWwD7Wr',
-            callback: (response) => {
-              setVerified([...verified, n]);
-            }
+            sitekey: '6Le1Q-4aAAAAAPxiA-8un2vTzU5PoCw9-wWwD7Wr'
           }));
-      }, [max]);
-      React.useEffect(() => {
-        if (verified.length === max) {
-          setMax(max + 9);
-        }
-      }, [verified]);
+      }, []);
       return (
         <div>
           <section class="hero is-primary">
@@ -42,9 +34,9 @@
             </div>
           </section>
           <div class="container">
-            {[...Array(3).keys()].map(i => (
+            {[...Array(widgetCount / 3).keys()].map(i => (
               <div class="columns">
-                {[...Array(max / 3).keys()].map(j => (
+                {[...Array(3).keys()].map(j => (
                   <div class="column">
                     <div id={`widget${i * 3 + j}`}></div>
                   </div>
