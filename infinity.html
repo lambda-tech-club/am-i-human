@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>無限reCaptcha</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
+  <!-- Don't use this in production: -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const App = () => {
+      const [max, setMax] = React.useState(0);
+      const [verified, setVerified] = React.useState([]);
+      React.useEffect(() => {
+        const widgets = [...Array(max).keys()].map(n =>
+          grecaptcha.render(`widget${n}`, {
+            sitekey: '6Le1Q-4aAAAAAPxiA-8un2vTzU5PoCw9-wWwD7Wr',
+            callback: (response) => {
+              setVerified([...verified, n]);
+            }
+          }));
+      }, [max]);
+      React.useEffect(() => {
+        if (verified.length === max) {
+          setMax(max + 9);
+        }
+      }, [verified]);
+      return (
+        <div>
+          <section class="hero is-primary">
+            <div class="hero-body">
+              <p class="title">
+                無限reCaptcha
+              </p>
+            </div>
+          </section>
+          <div class="container">
+            {[...Array(3).keys()].map(i => (
+              <div class="columns">
+                {[...Array(max / 3).keys()].map(j => (
+                  <div class="column">
+                    <div id={`widget${i * 3 + j}`}></div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+    const onloadCallback = () => {
+      ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+      );
+    };
+  </script>
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+  </script>
+
+</body>
+
+</html>
