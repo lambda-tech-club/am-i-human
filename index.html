@@ -15,34 +15,53 @@
   <div id="root"></div>
   <script type="text/babel">
     const App = () => {
+      const [verified, setVerified] = React.useState(false);
       React.useEffect(() => {
         grecaptcha.render('html_element', {
-          sitekey: '6Le1Q-4aAAAAAPxiA-8un2vTzU5PoCw9-wWwD7Wr'
+          sitekey: '6Le1Q-4aAAAAAPxiA-8un2vTzU5PoCw9-wWwD7Wr',
+          callback: (response) => {
+            setVerified(true);
+          }
         });
       }, []);
       return (
         <div>
-          <section className="hero is-fullheight">
-            <div className="hero-body">
-              <div className="container has-text-centered">
-                <p className="title">
-                  自分はロボットではないかと不安な方へ
+          {verified ? (
+            <section className="hero is-primary is-fullheight">
+              <div className="hero-body">
+                <div className="container has-text-centered">
+                  <p className="title">
+                    おめでとうございます。あなたは人間です。
                   </p>
-                <p className="subtitle">
-                  下のチェックボックスをクリックして確かめてみましょう。
+                  <p className="subtitle">
+                    ご安心ください。あなたはテストを突破することにより人間だと証明されました。
                   </p>
-                <div style={{
-                  marginRight: 'auto',
-                  marginLeft: 'auto',
-                  textAlign: 'center',
-                  width: '300px',
-                  marginTop: '20px'
-                }}>
-                  <div id="html_element"></div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          ) : (
+            <section className="hero is-fullheight">
+              <div className="hero-body">
+                <div className="container has-text-centered">
+                  <p className="title">
+                    自分はロボットではないかと不安な方へ
+                  </p>
+                  <p className="subtitle">
+                    下のチェックボックスをクリックして確かめてみましょう。
+                  </p>
+                  <div style={{
+                    marginRight: 'auto',
+                    marginLeft: 'auto',
+                    textAlign: 'center',
+                    width: '300px',
+                    marginTop: '20px'
+                  }}>
+                    <div id="html_element"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
         </div>
       )
     }
