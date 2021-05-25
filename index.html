@@ -14,12 +14,14 @@
 <body>
   <div id="root"></div>
   <script type="text/babel">
+    const se = new Audio('tada.wav');
     const App = () => {
       const [verified, setVerified] = React.useState(false);
       React.useEffect(() => {
         grecaptcha.render('html_element', {
           sitekey: '6Le1Q-4aAAAAAPxiA-8un2vTzU5PoCw9-wWwD7Wr',
           callback: (response) => {
+            se.play();
             setVerified(true);
           }
         });
