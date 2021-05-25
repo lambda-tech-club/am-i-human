@@ -26,18 +26,18 @@
       }, []);
       return (
         <div>
-          <section class="hero is-primary">
-            <div class="hero-body">
-              <p class="title">
+          <section className="hero is-primary">
+            <div className="hero-body">
+              <p className="title">
                 無限reCaptcha
               </p>
             </div>
           </section>
-          <div class="container">
+          <div className="container">
             {[...Array(widgetCount / 3).keys()].map(i => (
-              <div class="columns">
+              <div className="columns">
                 {[...Array(3).keys()].map(j => (
-                  <div class="column">
+                  <div className="column">
                     <div id={`widget${i * 3 + j}`}></div>
                   </div>
                 ))}
