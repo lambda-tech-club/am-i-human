@@ -6,7 +6,7 @@
   <title>Hello World</title>
   <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
   <!-- Don't use this in production: -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
@@ -22,7 +22,27 @@
       }, []);
       return (
         <div>
-          <div id="html_element"></div>
+          <section className="hero is-fullheight">
+            <div className="hero-body">
+              <div className="container has-text-centered">
+                <p className="title">
+                  自分はロボットではないかと不安な方へ
+                  </p>
+                <p className="subtitle">
+                  下のチェックボックスをクリックして確かめてみましょう。
+                  </p>
+                <div style={{
+                  marginRight: 'auto',
+                  marginLeft: 'auto',
+                  textAlign: 'center',
+                  width: '300px',
+                  marginTop: '20px'
+                }}>
+                  <div id="html_element"></div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       )
     }
